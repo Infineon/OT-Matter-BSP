@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Design version="12" xmlns="http://cypress.com/xsd/cydesignfile_v3">
-    <ToolInfo version="2.3.0.4276"/>
+    <ToolInfo version="2.4.0.5721"/>
     <Devices>
-        <Device mpn="LBCA1KU1WA">
+        <Device mpn="CYW30739A0KUMLG">
             <BlockConfig>
-                <Block location="amplifiers[0]">
-                    <Personality template="20x19_amplifiers" version="1.0"/>
-                </Block>
-                <Block location="audio[0]">
-                    <Personality template="20x19_i2s" version="1.0"/>
-                </Block>
                 <Block location="bluetooth[0]">
                     <Personality template="20x19_bluetooth" version="1.0"/>
-                </Block>
-                <Block location="i2c[0]">
-                    <Personality template="20x19_i2c" version="1.0"/>
                 </Block>
                 <Block location="ioss[0]">
                     <Personality template="20x19_ioss" version="1.0"/>
                 </Block>
                 <Block location="ioss[0].pin[0]">
-                    <Alias value="BUTTON_CUSTOM"/>
+                    <Alias value="BUTTON_USER"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="BUTTON"/>
                         <Param id="Index" value="1"/>
@@ -33,35 +24,11 @@
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[10]">
-                    <Alias value="I2S_WS"/>
+                    <Alias value="PUART_TXD"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="0"/>
                         <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[11]">
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[12]">
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
                         <Param id="Control" value="GPIO_INPUT_ENABLE"/>
                         <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
                         <Param id="InterruptEnable" value="false"/>
@@ -69,35 +36,34 @@
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[16]">
-                    <Alias value="SPI_CS"/>
+                    <Alias value="GPIO2"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="GPIO"/>
-                        <Param id="Index" value="1"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
+                        <Param id="Index" value="2"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
                         <Param id="Control" value="GPIO_OUTPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP"/>
+                        <Param id="PullMode" value="GPIO_INPUT_DISABLE"/>
                         <Param id="InterruptEnable" value="false"/>
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[17]">
-                    <Alias value="BUTTON_USER"/>
+                    <Alias value="RX_PU"/>
                     <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="BUTTON"/>
-                        <Param id="Index" value="4"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP"/>
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="7"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
+                        <Param id="Control" value="GPIO_OUTPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_INPUT_DISABLE"/>
                         <Param id="InterruptEnable" value="false"/>
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[25]">
-                    <Alias value="SPI_CLK"/>
+                    <Alias value="GPIO3"/>
                     <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="3"/>
                         <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
                         <Param id="Control" value="GPIO_INPUT_ENABLE"/>
                         <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
@@ -106,6 +72,54 @@
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[26]">
+                    <Alias value="TX_PU"/>
+                    <Personality template="20x19_pin" version="1.0">
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="6"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
+                        <Param id="Control" value="GPIO_OUTPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_INPUT_DISABLE"/>
+                        <Param id="InterruptEnable" value="false"/>
+                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
+                    </Personality>
+                </Block>
+                <Block location="ioss[0].pin[28]">
+                    <Alias value="GPIO4"/>
+                    <Personality template="20x19_pin" version="1.0">
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="4"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
+                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
+                        <Param id="InterruptEnable" value="false"/>
+                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
+                    </Personality>
+                </Block>
+                <Block location="ioss[0].pin[29]">
+                    <Alias value="GPIO5"/>
+                    <Personality template="20x19_pin" version="1.0">
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="5"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
+                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
+                        <Param id="InterruptEnable" value="false"/>
+                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
+                    </Personality>
+                </Block>
+                <Block location="ioss[0].pin[33]">
+                    <Alias value="DEBUG_UART_TXD"/>
+                    <Personality template="20x19_pin" version="1.0">
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="8"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
+                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
+                        <Param id="InterruptEnable" value="false"/>
+                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
+                    </Personality>
+                </Block>
+                <Block location="ioss[0].pin[34]">
                     <Alias value="LED1"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="LED"/>
@@ -117,7 +131,7 @@
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
-                <Block location="ioss[0].pin[27]">
+                <Block location="ioss[0].pin[38]">
                     <Alias value="LED2"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="LED"/>
@@ -129,130 +143,20 @@
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
-                <Block location="ioss[0].pin[28]">
-                    <Alias value="SPI_MOSI"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[29]">
-                    <Alias value="SPI_MISO"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[30]">
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[33]">
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[34]">
-                    <Alias value="BUTTON_VOL_DN"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="BUTTON"/>
-                        <Param id="Index" value="3"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[35]">
-                    <Alias value="TX_PU"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[36]">
-                    <Alias value="RX_PU"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[37]">
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
-                <Block location="ioss[0].pin[38]">
-                    <Alias value="BUTTON_VOL_UP"/>
-                    <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="BUTTON"/>
-                        <Param id="Index" value="2"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
-                        <Param id="PressedValue" value="GPIO_PIN_OUTPUT_LOW"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP"/>
-                        <Param id="InterruptEnable" value="false"/>
-                        <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
-                    </Personality>
-                </Block>
                 <Block location="ioss[0].pin[4]">
-                    <Alias value="I2S_DI"/>
+                    <Alias value="PWM0"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="4"/>
-                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_HIGH"/>
-                        <Param id="Control" value="GPIO_INPUT_ENABLE"/>
-                        <Param id="PullMode" value="GPIO_PULL_UP"/>
+                        <Param id="Index" value="1"/>
+                        <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
+                        <Param id="Control" value="GPIO_OUTPUT_ENABLE"/>
+                        <Param id="PullMode" value="GPIO_INPUT_DISABLE"/>
                         <Param id="InterruptEnable" value="false"/>
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[6]">
-                    <Alias value="I2S_DO"/>
+                    <Alias value="PUART_RXD"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="0"/>
@@ -264,10 +168,10 @@
                     </Personality>
                 </Block>
                 <Block location="ioss[0].pin[7]">
-                    <Alias value="I2S_CLK"/>
+                    <Alias value="GPIO1"/>
                     <Personality template="20x19_pin" version="1.0">
-                        <Param id="Type" value="PERIPHERAL"/>
-                        <Param id="Index" value="0"/>
+                        <Param id="Type" value="GPIO"/>
+                        <Param id="Index" value="1"/>
                         <Param id="DefaultState" value="GPIO_PIN_OUTPUT_LOW"/>
                         <Param id="Control" value="GPIO_INPUT_ENABLE"/>
                         <Param id="PullMode" value="GPIO_PULL_UP_DOWN_NONE"/>
@@ -275,50 +179,25 @@
                         <Param id="InterruptTrigger" value="GPIO_EN_INT_RISING_EDGE"/>
                     </Personality>
                 </Block>
+                <Block location="pwm[0]">
+                    <Personality template="20x19_pwm" version="1.0"/>
+                </Block>
                 <Block location="uart[1]">
                     <Personality template="20x19_uart" version="1.0"/>
                 </Block>
             </BlockConfig>
             <Netlist>
                 <Net>
-                    <Port name="amplifiers[0].rx_pu[0]"/>
-                    <Port name="ioss[0].pin[36].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="amplifiers[0].tx_pu[0]"/>
-                    <Port name="ioss[0].pin[35].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="audio[0].clk[0]"/>
-                    <Port name="ioss[0].pin[7].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="audio[0].di_in[0]"/>
                     <Port name="ioss[0].pin[4].aux[0]"/>
+                    <Port name="pwm[0].pwm[0]"/>
                 </Net>
                 <Net>
-                    <Port name="audio[0].do_out[0]"/>
                     <Port name="ioss[0].pin[6].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="audio[0].ws_sync[0]"/>
-                    <Port name="ioss[0].pin[10].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="i2c[0].scl[0]"/>
-                    <Port name="ioss[0].pin[12].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="i2c[0].sda[0]"/>
-                    <Port name="ioss[0].pin[11].aux[0]"/>
-                </Net>
-                <Net>
-                    <Port name="ioss[0].pin[30].aux[0]"/>
-                    <Port name="uart[1].txd[0]"/>
-                </Net>
-                <Net>
-                    <Port name="ioss[0].pin[37].aux[0]"/>
                     <Port name="uart[1].rxd[0]"/>
+                </Net>
+                <Net>
+                    <Port name="ioss[0].pin[10].aux[0]"/>
+                    <Port name="uart[1].txd[0]"/>
                 </Net>
             </Netlist>
         </Device>
