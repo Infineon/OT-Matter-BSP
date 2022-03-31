@@ -211,6 +211,9 @@ wiced_platform_gpio_config_t;
 /*! IEEE 802.15.4 PHY ED Threshold Value used for CCA. */
 #define WICED_PLATFORM_I15DOT4_PHY_ED_THRESHOLD (-70)
 
+/* ! Pin for ePA TX. */
+#define WICED_GPIO_EPA_TX   WICED_P26
+
 #ifdef __cplusplus
 extern "C" {
 #endif
