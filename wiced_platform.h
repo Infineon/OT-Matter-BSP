@@ -211,8 +211,26 @@ wiced_platform_gpio_config_t;
 /*! IEEE 802.15.4 PHY ED Threshold Value used for CCA. */
 #define WICED_PLATFORM_I15DOT4_PHY_ED_THRESHOLD (-70)
 
-/* ! Pin for ePA TX. */
-#define WICED_GPIO_EPA_TX   WICED_P26
+#if WICED_PLATFORM_EPA
+
+/* ! Pin for ePA Enable */
+#define WICED_GPIO_EPA_EN   WICED_P26
+
+/* ! Pin state for ePA enable */
+#define EPA_EN_STATE_OFF    (GPIO_PIN_OUTPUT_LOW)
+#define EPA_EN_STATE_ON     !EPA_EN_STATE_OFF
+
+#endif // WICED_PLATFORM_EPA
+
+#if WICED_PLATFORM_ELNA
+/* ! Pin for eLNA Enable. */
+#define WICED_GPIO_ELNA_EN  WICED_P17
+
+/* ! Pin state for eLNA enable */
+#define ELNA_EN_STATE_OFF   (GPIO_PIN_OUTPUT_LOW)
+#define ELNA_EN_STATE_ON    !ELNA_EN_STATE_OFF
+
+#endif // WICED_PLATFORM_ELNA
 
 #ifdef __cplusplus
 extern "C" {
@@ -384,6 +402,25 @@ uint32_t wiced_platform_serial_flash_sector_num_get(void);
  *
  */
 void wiced_platform_serial_flash_erase(uint32_t start_sector, uint32_t sector_num);
+
+#if WICED_PLATFORM_EPA
+
+/**
+ * \brief Initialize ePA.
+ */
+void wiced_platform_epa_init(void);
+
+/**
+ * \brief Enable ePA.
+ */
+void wiced_platform_epa_enable(void);
+
+/**
+ * \brief Disable ePA.
+ */
+void wiced_platform_epa_disable(void);
+
+#endif // WICED_PLATFORM_EPA
 
 #ifdef __cplusplus
 } /* extern "C" */
