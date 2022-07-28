@@ -73,4 +73,3 @@ void __attribute__((weak)) wiced_platform_epa_disable(void)
 #endif // WICED_PLATFORM_EPA
 
 /* ----------------- Static Functions ----------------*/
-
