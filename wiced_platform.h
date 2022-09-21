@@ -1,5 +1,5 @@
 /*
- * Copyright 2016-2021, Cypress Semiconductor Corporation (an Infineon company) or
+ * Copyright 2016-2022, Cypress Semiconductor Corporation (an Infineon company) or
  * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
  *
  * This software, including source code, documentation and related
@@ -202,21 +202,22 @@ typedef struct
 }
 wiced_platform_gpio_config_t;
 
-/*! pin for button 1 */
-
 /*! configuration settings for button, x can be GPIO_EN_INT_RISING_EDGE or GPIO_EN_INT_FALLING_EDGE or GPIO_EN_INT_BOTH_EDGE */
 #define WICED_GPIO_BUTTON_SETTINGS(x)                       ( GPIO_INPUT_ENABLE | GPIO_PULL_UP | x )
 
 /*! pin for LED 1 */
-#define WICED_GPIO_PIN_LED_1    WICED_P34
+#define WICED_GPIO_PIN_LED_1    WICED_P26
 /*! pin for LED 2 */
-#define WICED_GPIO_PIN_LED_2    WICED_P38
+#define WICED_GPIO_PIN_LED_2    WICED_P27
+/*! pin for UART2 PUART */
+#define WICED_PUART_TXD         WICED_P10
+#define WICED_PUART_RXD         WICED_P06
 
-#define WICED_PUART_TXD         WICED_P30
-#define WICED_PUART_RXD         WICED_P37
-
-#define WICED_BUTTON1           WICED_P00
+/*! pin for button */
+#define WICED_BUTTON1           WICED_P17
+/*! pin for reset */
 #define WICED_RESET_PIN         WICED_P21
+/*! pin for debug */
 #define WICED_DEBUG_PIN         WICED_P33
 
 /*! Pin state for the LED on. */
@@ -240,26 +241,25 @@ wiced_platform_gpio_config_t;
 /*! IEEE 802.15.4 PHY ED Threshold Value used for CCA. */
 #define WICED_PLATFORM_I15DOT4_PHY_ED_THRESHOLD (-70)
 
+
+/*! ePA */
 #if WICED_PLATFORM_EPA
-
-/* ! Pin for ePA Enable */
-#define WICED_GPIO_EPA_EN   WICED_P26
-
-/* ! Pin state for ePA enable */
+/*! Pin for ePA Enable */
+#define WICED_GPIO_EPA_EN   WICED_P35
+/*! Pin state for ePA enable */
 #define EPA_EN_STATE_OFF    (GPIO_PIN_OUTPUT_LOW)
 #define EPA_EN_STATE_ON     !EPA_EN_STATE_OFF
-
 #endif // WICED_PLATFORM_EPA
 
+/*! eLNA */
 #if WICED_PLATFORM_ELNA
-/* ! Pin for eLNA Enable. */
-#define WICED_GPIO_ELNA_EN  WICED_P17
-
-/* ! Pin state for eLNA enable */
+/*! Pin for eLNA Enable. */
+#define WICED_GPIO_ELNA_EN  WICED_P36
+/*! Pin state for eLNA enable */
 #define ELNA_EN_STATE_OFF   (GPIO_PIN_OUTPUT_LOW)
 #define ELNA_EN_STATE_ON    !ELNA_EN_STATE_OFF
-
 #endif // WICED_PLATFORM_ELNA
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -381,6 +381,7 @@ wiced_result_t wiced_platform_entropy_get(uint8_t *output, uint16_t output_lengt
  */
 void wiced_platform_puart_init(void (*puart_rx_cbk)(void*));
 
+
 /**
  *  \brief Initialized the serial flash.
  *
@@ -432,8 +433,8 @@ uint32_t wiced_platform_serial_flash_sector_num_get(void);
  */
 void wiced_platform_serial_flash_erase(uint32_t start_sector, uint32_t sector_num);
 
-#if WICED_PLATFORM_EPA
 
+#if WICED_PLATFORM_EPA
 /**
  * \brief Initialize ePA.
  */
@@ -448,8 +449,8 @@ void wiced_platform_epa_enable(void);
  * \brief Disable ePA.
  */
 void wiced_platform_epa_disable(void);
-
 #endif // WICED_PLATFORM_EPA
+
 
 #ifdef __cplusplus
 } /* extern "C" */

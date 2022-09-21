@@ -1,5 +1,5 @@
 #
-# Copyright 2016-2021, Cypress Semiconductor Corporation (an Infineon company) or
+# Copyright 2016-2022, Cypress Semiconductor Corporation (an Infineon company) or
 # an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 #
 # This software, including source code, documentation and related
@@ -38,7 +38,7 @@ endif
 #
 # Device definition
 #
-DEVICE=CYW30739A0KUMLG
+DEVICE=CYW30739A0KWB9G
 CHIP=30739
 CHIP_REV=A0
 BLD=A
@@ -92,7 +92,7 @@ CY_CORE_DEFINES+=-DCY_PLATFORM_SWDIO=WICED_P03
 #
 # Patch variables
 #
-CY_CORE_PATCH=$(CY_INTERNAL_BASELIB_PATH)/internal/30739A0/patches_CYW930739M2EVB_01/patch.elf
+CY_CORE_PATCH=$(CY_INTERNAL_BASELIB_PATH)/internal/30739A0/patches_CYW930739M2EVB_02/patch.elf
 CY_CORE_PATCH_CFLAGS=$(CY_INTERNAL_BASELIB_PATH)/internal/30739A0/gcc/30739A0.cflag
 CY_CORE_PATCH_LIB_PATH=libraries/prebuilt
 
@@ -104,7 +104,7 @@ CY_CORE_HCI_ID=$(CY_INTERNAL_BASELIB_PATH)/platforms/IDFILE.txt
 CY_CORE_BTP=$(CY_INTERNAL_BASELIB_PATH)/platforms/flash.btp
 CY_CORE_MINIDRIVER=$(CY_INTERNAL_BASELIB_PATH)/platforms/minidriver.hex
 CY_CORE_CGSLIST=\
-    $(CY_INTERNAL_BASELIB_PATH)/internal/30739A0/patches_CYW930739M2EVB_01/patch.cgs\
+    $(CY_INTERNAL_BASELIB_PATH)/internal/30739A0/patches_CYW930739M2EVB_02/patch.cgs\
     $(CY_INTERNAL_BASELIB_PATH)/platforms/platform.cgs
 
 #

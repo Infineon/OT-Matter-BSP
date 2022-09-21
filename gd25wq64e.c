@@ -1,5 +1,34 @@
 /*
- * $ Copyright 2016-YEAR Cypress Semiconductor $
+ * Copyright 2016-2022, Cypress Semiconductor Corporation (an Infineon company) or
+ * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
+ *
+ * This software, including source code, documentation and related
+ * materials ("Software") is owned by Cypress Semiconductor Corporation
+ * or one of its affiliates ("Cypress") and is protected by and subject to
+ * worldwide patent protection (United States and foreign),
+ * United States copyright laws and international treaty provisions.
+ * Therefore, you may use this Software only as provided in the license
+ * agreement accompanying the software package from which you
+ * obtained this Software ("EULA").
+ * If no EULA applies, Cypress hereby grants you a personal, non-exclusive,
+ * non-transferable license to copy, modify, and compile the Software
+ * source code solely for use in connection with Cypress's
+ * integrated circuit products.  Any reproduction, modification, translation,
+ * compilation, or representation of this Software except as specified
+ * above is prohibited without the express written permission of Cypress.
+ *
+ * Disclaimer: THIS SOFTWARE IS PROVIDED AS-IS, WITH NO WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT, IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. Cypress
+ * reserves the right to make changes to the Software without notice. Cypress
+ * does not assume any liability arising out of the application or use of the
+ * Software or any product or circuit described in the Software. Cypress does
+ * not authorize its products for use in any products where a malfunction or
+ * failure of the Cypress product may reasonably be expected to result in
+ * significant property damage, injury or death ("High Risk Product"). By
+ * including Cypress's product in a High Risk Product, the manufacturer
+ * of such system or application assumes all risk of such use and in doing
+ * so agrees to indemnify Cypress against all liability.
  */
 
 /** @file
@@ -15,6 +44,7 @@
 #include <wiced_rtos.h>
 
 #include <wiced_bt_trace.h>
+#include <stdio.h>
 
 /******************************************************
  *                      Macros
@@ -23,6 +53,18 @@
 /******************************************************
  *                    Constants
  ******************************************************/
+
+/* DEBUG GD25WQ64E process */
+#ifndef GD25WQ64E_DEBUG
+#define GD25WQ64E_DEBUG 0
+#endif
+
+#if (GD25WQ64E_DEBUG!= 0)
+#define GD25WQ64E_TRACE(format, ...) (printf(format, __VA_ARGS__))
+#else
+#define GD25WQ64E_TRACE(...)
+#endif
+
 /* Target SPI Interface. */
 #ifndef GD25WQ64E_SPI_INTERFACE
 #define GD25WQ64E_SPI_INTERFACE SPI2
@@ -122,10 +164,12 @@ static gd25wq64e_cb_t gd25wq64e_cb = {0};
  */
 wiced_bool_t wiced_platform_serial_flash_init(void)
 {
-    uint8_t i;
+    uint8_t i = 0;
+    uint8_t retry = 0;
 
     if (gd25wq64e_cb.initialized)
     {
+        GD25WQ64E_TRACE("%s, already initialized\n", __FUNCTION__);
         return WICED_TRUE;
     }
 
@@ -139,13 +183,13 @@ wiced_bool_t wiced_platform_serial_flash_init(void)
     /* Read flash identification. */
     gd25wq64e_cb.data.tx[0] = GD25WQ64E_READ_IDENTIFICATION;
 
-    i = 0;
     while (1)
     {
         wiced_hal_pspi_exchange_data(GD25WQ64E_SPI_INTERFACE, 4, gd25wq64e_cb.data.tx, gd25wq64e_cb.data.rx);
         gd25wq64e_cb.id.manufacture = gd25wq64e_cb.data.rx[1];
         gd25wq64e_cb.id.memory_type = gd25wq64e_cb.data.rx[2];
         gd25wq64e_cb.id.capacity    = gd25wq64e_cb.data.rx[3];
+        GD25WQ64E_TRACE("%s, manufacture:0x%x, memory_type:0x%x, capacity:0x%x\n", __FUNCTION__, gd25wq64e_cb.id.manufacture, gd25wq64e_cb.id.memory_type, gd25wq64e_cb.id.capacity);
 
         /* Count flash size. */
         gd25wq64e_cb.size = 1;
@@ -157,12 +201,15 @@ wiced_bool_t wiced_platform_serial_flash_init(void)
         /* Check flash size. */
         if (gd25wq64e_cb.size == GD25WQ64E_SIZE)
         {
+            GD25WQ64E_TRACE("%s, cmp size pass\n\n", __FUNCTION__);
             break;
         }
 
-        i++;
-        if (i > GD25WQ64E_MAX_RETRY_COUNTS)
+		/* Check retry times */
+        retry++;
+        if (retry > GD25WQ64E_MAX_RETRY_COUNTS)
         {
+            GD25WQ64E_TRACE("%s, return FALSE\n", __FUNCTION__);
             return WICED_FALSE;
         }
 
@@ -199,6 +246,7 @@ wiced_bool_t wiced_platform_serial_flash_init(void)
  */
 uint32_t wiced_platform_serial_flash_size_get(void)
 {
+    GD25WQ64E_TRACE("%s, size: %ld\n", __FUNCTION__, gd25wq64e_cb.size);
     return gd25wq64e_cb.size;
 }
 
@@ -363,6 +411,17 @@ void gd25wq64e_status_register_read_1(void)
 
     wiced_hal_pspi_exchange_data(GD25WQ64E_SPI_INTERFACE, 2, gd25wq64e_cb.data.tx, gd25wq64e_cb.data.rx);
     memcpy((void *) &gd25wq64e_cb.status_register.sr1, (void *) &gd25wq64e_cb.data.rx[1], sizeof(gd25wq64e_cb.status_register.sr1));
+
+    /* debug */
+    GD25WQ64E_TRACE("> [wip][wel][bp0][bp1][bp2][bp3][bp4][srp0] ---> SR1(0x%x)\n", gd25wq64e_cb.status_register.sr1.value);
+    GD25WQ64E_TRACE(">   %d    %d    %d    %d    %d    %d    %d      %d\n", gd25wq64e_cb.status_register.sr1.field.wip,
+                    gd25wq64e_cb.status_register.sr1.field.wel,
+                    gd25wq64e_cb.status_register.sr1.field.bp0,
+                    gd25wq64e_cb.status_register.sr1.field.bp1,
+                    gd25wq64e_cb.status_register.sr1.field.bp2,
+                    gd25wq64e_cb.status_register.sr1.field.bp3,
+                    gd25wq64e_cb.status_register.sr1.field.bp4,
+                    gd25wq64e_cb.status_register.sr1.field.srp0);
 }
 
 void gd25wq64e_status_register_read_2(void)
@@ -372,6 +431,18 @@ void gd25wq64e_status_register_read_2(void)
 
     wiced_hal_pspi_exchange_data(GD25WQ64E_SPI_INTERFACE, 2, gd25wq64e_cb.data.tx, gd25wq64e_cb.data.rx);
     memcpy((void *) &gd25wq64e_cb.status_register.sr2, (void *) &gd25wq64e_cb.data.rx[1], sizeof(gd25wq64e_cb.status_register.sr2));
+
+    /* debug */
+    GD25WQ64E_TRACE("> [srp1][qe][sus2][lb1][lb2][lb3][cmp][sus1] --> SR2(0x%x)\n", gd25wq64e_cb.status_register.sr2.value);
+    GD25WQ64E_TRACE(">     %d   %d     %d   %d    %d    %d    %d      %d\n", gd25wq64e_cb.status_register.sr2.field.srp1,
+                    gd25wq64e_cb.status_register.sr2.field.qe,
+                    gd25wq64e_cb.status_register.sr2.field.sus2,
+                    gd25wq64e_cb.status_register.sr2.field.lb1,
+                    gd25wq64e_cb.status_register.sr2.field.lb2,
+                    gd25wq64e_cb.status_register.sr2.field.lb3,
+                    gd25wq64e_cb.status_register.sr2.field.cmp,
+                    gd25wq64e_cb.status_register.sr2.field.sus1);
+
 }
 
 void gd25wq64e_status_register_read_3(void)
@@ -381,6 +452,15 @@ void gd25wq64e_status_register_read_3(void)
 
     wiced_hal_pspi_exchange_data(GD25WQ64E_SPI_INTERFACE, 2, gd25wq64e_cb.data.tx, gd25wq64e_cb.data.rx);
     memcpy((void *) &gd25wq64e_cb.status_register.sr3, (void *) &gd25wq64e_cb.data.rx[1], sizeof(gd25wq64e_cb.status_register.sr3));
+
+    /* debug */
+    GD25WQ64E_TRACE("> [dc][rev][drv0][drv1][rev_1] ----------------> SR3(0x%x)\n", gd25wq64e_cb.status_register.sr3.value);
+    GD25WQ64E_TRACE(">   %d   %d      %d     %d     %d\n", gd25wq64e_cb.status_register.sr3.field.dc,
+                    gd25wq64e_cb.status_register.sr3.field.reserved,
+                    gd25wq64e_cb.status_register.sr3.field.drv0,
+                    gd25wq64e_cb.status_register.sr3.field.drv1,
+                    gd25wq64e_cb.status_register.sr3.field.reserved_1);
+
 }
 
 void gd25wq64e_status_register_write_1(uint8_t value)
