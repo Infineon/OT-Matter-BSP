@@ -132,6 +132,7 @@ wiced_result_t gpio_button_enable   ( const gpio_button_t* button );
 wiced_result_t gpio_button_disable  ( const gpio_button_t* button );
 wiced_bool_t   gpio_button_get_value( const gpio_button_t* button );
 wiced_result_t gpio_button_register_state_change_callback( gpio_button_state_change_callback_t callback );
+wiced_bool_t gpio_button_pending_event_get_and_clear(const gpio_button_t *button);
 
 #ifdef __cplusplus
 } /*extern "C" */
