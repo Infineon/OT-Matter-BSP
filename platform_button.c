@@ -144,3 +144,8 @@ static void platform_button_state_change_callback( gpio_button_t* button, wiced_
 {
     user_callback( ( platform_button_t ) ARRAY_POSITION( platform_gpio_buttons, button ), new_state );
 }
+
+wiced_bool_t platform_button_pending_event_get_and_clear(platform_button_t button)
+{
+    return gpio_button_pending_event_get_and_clear(&platform_gpio_buttons[button]);
+}

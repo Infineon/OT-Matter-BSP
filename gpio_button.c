@@ -41,6 +41,7 @@
 #include "wiced_hal_gpio.h"
 #include "wiced_rtos.h"
 #include "gpio_button.h"
+#include "wiced_hal_platform.h"
 #include "wiced_platform.h"
 
 /******************************************************
@@ -186,4 +187,9 @@ static void gpio_button_interrupt_handler( void* args, uint8_t pin )
     is_pressed = ( button->polarity == WICED_ACTIVE_HIGH ) ? ( (gpio_state  == WICED_FALSE ) ? WICED_TRUE : WICED_FALSE ) : ( (gpio_state == WICED_FALSE ) ? WICED_FALSE : WICED_TRUE );
 
     button_state_change_callback( (void*)button, is_pressed );
+}
+
+wiced_bool_t gpio_button_pending_event_get_and_clear(const gpio_button_t *button)
+{
+    return wiced_hal_platform_gpio_int_status_get_and_clear(button->gpio) == 1;
 }
