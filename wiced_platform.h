@@ -361,19 +361,6 @@ void wiced_platform_application_thread_event_dispatch(void);
 void wiced_platform_application_thread_specific_handler_register(wiced_platform_application_thread_specific_handler *p_handler);
 
 /**
- * \brief This function use a true random number generator to fill the buffer with entropy.
- *
- * @param[out] output         A pointer to where the true random values are placed. Must not be NULL.
- * @param[in]  output_length  Size of the buffer.
- *
- * @retval WICED_SUCCESS  Successfully filled the buffer with true random values.
- * @retval WICED_ERROR    Failed to fill the buffer with true random values.
- * @retval WICED_BADARG   The buffer was set to NULL.
- */
-wiced_result_t wiced_platform_entropy_get(uint8_t *output, uint16_t output_length);
-
-
-/**
  * \brief Initialize PUART
  *
  * @param[in] puart_rx_cbk         Call back function to process rx bytes.
