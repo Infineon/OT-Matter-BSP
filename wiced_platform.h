@@ -368,59 +368,6 @@ void wiced_platform_application_thread_specific_handler_register(wiced_platform_
  */
 void wiced_platform_puart_init(void (*puart_rx_cbk)(void*));
 
-
-/**
- *  \brief Initialized the serial flash.
- *
- */
-void wiced_platform_serial_flash_init(void);
-
-/**
- * \brief Get the serial flash size.
- *
- * @retval size of the serial flash
- */
-uint32_t wiced_platform_serial_flash_size_get(void);
-
-/**
- * \brief Read data from serial flash.
- *
- * @param[in] addr      start address
- * @param[in] p_data    buffer to store the read data
- * @param[in] data_len  length of data to be read
- *
- * @retval total length of read data
- */
-uint32_t wiced_platform_serial_flash_read(uint32_t addr, uint8_t *p_data, uint32_t data_len);
-
-/**
- * \brief Write data to serial flash.
- *
- * @param[in] addr      start address
- * @param[in] p_data    buffer of the data to be written to the serial flash
- * @param[in] data_len  length of data to be written
- *
- * @retval total length of written data
- */
-uint32_t wiced_platform_serial_flash_write(uint32_t addr, uint8_t *p_data, uint32_t data_len);
-
-/**
- * \brief Get the serial flash total sector numbers.
- *
- * @retval total sectors of the serial flash
- */
-uint32_t wiced_platform_serial_flash_sector_num_get(void);
-
-/**
- * \brief Erase data in serial flash. (Set both parameters to 0 to erase whole serial flash)
- *
- * @param[in] start_sector  start index of sector to erase
- * @param[in] sector_num    number of sector(s) to be erases
- *
- */
-void wiced_platform_serial_flash_erase(uint32_t start_sector, uint32_t sector_num);
-
-
 #if WICED_PLATFORM_EPA
 /**
  * \brief Initialize ePA.
