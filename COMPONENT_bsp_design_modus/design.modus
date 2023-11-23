@@ -2,7 +2,7 @@
 <Design version="12" xmlns="http://cypress.com/xsd/cydesignfile_v3">
     <ToolInfo version="2.4.0.5972"/>
     <Devices>
-        <Device mpn="CYW30739A0KUMLG">
+        <Device mpn="CYW30739B2KUMLG">
             <BlockConfig>
                 <Block location="i2c[0]">
                     <Alias value="PLATFORM_I2C_1"/>
