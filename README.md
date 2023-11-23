@@ -1,8 +1,8 @@
-# CYW30739A0-P5-EVK02
+# CYW30739B2-P5-EVK02
 
 ### Overview
 
-The Infineon CYW30739A0-P5-EVK02 Evaluation kit enables you to evaluate and develop solutions using the AIROC&#8482; CYW30739 multi-protocol system on chip.
+The Infineon CYW30739B2-P5-EVK02 Evaluation kit enables you to evaluate and develop solutions using the AIROC&#8482; CYW30739 multi-protocol system on chip.
 The CYW30739 is an ultra-low-power multi-protocol SoC with an integrated 2.4 GHz transceiver supporting Bluetooth&#174; LE and Matter over Thread.
 The CYW30739 employs high integration to reduce external components, thereby minimizing the device's footprint and cost.
 This kit helps evaluate device functionality and develop applications quickly for faster time-to-market.
@@ -21,7 +21,7 @@ This kit helps evaluate device functionality and develop applications quickly fo
 
 * Baseboard: CYW9BTMDM2BASE1
 * M2 Adapter Card: CYW930739MD2M2ADP
-* Module Pad: CYW30739A0-P5CAI101
+* Module Pad: CYW30739B2-P5CAI101
 
 ### Additional Information
 
